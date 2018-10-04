@@ -48,4 +48,23 @@ public class BakerControllerTest {
         Assert.assertEquals(expected, actual);
         Assert.assertEquals(expectedBaker, actualBaker);
     }
+
+
+    @Test
+    public void testShow() {
+        // Given
+        Long bakerId = 1L;
+        HttpStatus expected = HttpStatus.OK;
+        Baker expectedBaker = new Baker(bakerId, null, null, null);
+        given(repo.findOne(1L)).willReturn(expectedBaker);
+
+        // When
+        ResponseEntity<Baker> response = controller.show(bakerId);
+        HttpStatus actual = response.getStatusCode();
+        Baker actualBaker = response.getBody();
+
+        // Then
+        Assert.assertEquals(expected, actual);
+        Assert.assertEquals(expectedBaker, actualBaker);
+    }
 }
